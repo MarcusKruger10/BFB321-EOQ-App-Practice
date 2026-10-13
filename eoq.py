@@ -1,10 +1,10 @@
 # eoq.py
-# EOQ model - from the EOQ Tutorial (Supply Chain Technology)
+# EOQ model - interactive version
 
-import math   # Refresher 2: imports - gives us math.sqrt()
+import math
 
 
-# ----- Functions (Refresher 2: def, parameters, return) -----
+# ----- Functions (unchanged - Flask will reuse these) -----
 def calculate_eoq(demand, order_cost, hold_cost):
     """Return the Economic Order Quantity."""
     return math.sqrt((2 * demand * order_cost) / hold_cost)
@@ -17,25 +17,48 @@ def total_annual_cost(demand, order_cost, hold_cost, order_qty):
     return ordering + holding
 
 
-# ----- Inputs (Refresher 1: variables and assignment) -----
-annual_demand = 12000   # D - units per year (int)
-ordering_cost = 50      # S - Rand per order (int)
-holding_cost = 2        # H - Rand per unit per year (int)
+# Everything below only runs when you run THIS file directly.
+# When Flask imports the functions above, this part is skipped.
+if __name__ == "__main__":
+    again = "y"
 
-# ----- Calculations -----
-eoq = calculate_eoq(annual_demand, ordering_cost, holding_cost)
-orders_per_year = annual_demand / eoq
-days_between_orders = 365 / orders_per_year
-cost_at_eoq = total_annual_cost(annual_demand, ordering_cost, holding_cost, eoq)
+    # ----- While loop: keep going until the user says no -----
+    while again == "y":
+        print("\n=== EOQ Calculator ===")
 
-# ----- Output (Refresher 1: print; Refresher 2: round) -----
-print("Optimal order quantity:", round(eoq, 2))
-print("Orders per year:", round(orders_per_year, 2))
-print("Days between orders:", round(days_between_orders, 1))
-print("Total annual cost at EOQ:", round(cost_at_eoq, 2))
+        # ----- input() always returns a STRING, so cast with float() -----
+        demand = float(input("Annual demand (D): "))
+        order_cost = float(input("Ordering cost per order (S): R"))
+        hold_cost = float(input("Holding cost per unit per year (H): R"))
 
-# ----- Step 7: prove EOQ is the minimum (Refresher 2: for loop + range) -----
-print("\nQty   Total cost")
-for qty in range(50, 1500, 100):
-    cost = total_annual_cost(annual_demand, ordering_cost, holding_cost, qty)
-    print(qty, round(cost, 2))
+        # ----- Validation: logical operator 'or' + if/else -----
+        if demand <= 0 or order_cost <= 0 or hold_cost <= 0:
+            print("Error: all values must be greater than 0.")
+        else:
+            eoq = calculate_eoq(demand, order_cost, hold_cost)
+            orders_per_year = demand / eoq
+
+            # ----- Dictionary: key -> value pairs -----
+            results = {
+                "Optimal order quantity": round(eoq, 2),
+                "Orders per year": round(orders_per_year, 2),
+                "Days between orders": round(365 / orders_per_year, 1),
+                "Total annual cost (R)": round(total_annual_cost(demand, order_cost, hold_cost, eoq), 2),
+            }
+
+            # ----- For loop over the dictionary with .items() -----
+            for label, value in results.items():
+                print(label + ":", value)
+
+            # ----- Chained conditional: if / elif / else -----
+            if orders_per_year > 12:
+                print("Advice: you'll order more than once a month.")
+            elif orders_per_year >= 4:
+                print("Advice: you'll order roughly every 1 to 3 months.")
+            else:
+                print("Advice: you'll order fewer than 4 times a year.")
+
+        # ----- String methods: .strip() removes spaces, .lower() fixes "Y" -----
+        again = input("\nCalculate another? (y/n): ").strip().lower()
+
+    print("Goodbye!")
