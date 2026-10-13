@@ -18,4 +18,31 @@
         <button type="submit">Calculate</button>
     </form>
 </section>
+{% if error %}
+<section>
+    <p class="error">{{ error }}</p>
+</section>
+{% endif %}
+
+{% if result %}
+<section class="result">
+    <h2>Your results</h2>
+    <table>
+        <tbody>
+            <tr><th>Optimal order quantity (EOQ)</th><td>{{ result.eoq }} units</td></tr>
+            <tr><th>Orders per year</th><td>{{ result.orders_per_year }}</td></tr>
+            <tr><th>Days between orders</th><td>{{ result.days_between }}</td></tr>
+            <tr><th>Total annual cost</th><td>R{{ result.total_cost }}</td></tr>
+        </tbody>
+    </table>
+
+    {% if result.orders_per_year > 12 %}
+        <p>Advice: you'll order more than once a month.</p>
+    {% elif result.orders_per_year >= 4 %}
+        <p>Advice: you'll order roughly every 1 to 3 months.</p>
+    {% else %}
+        <p>Advice: you'll order fewer than 4 times a year.</p>
+    {% endif %}
+</section>
+{% endif %}
 {% endblock %}

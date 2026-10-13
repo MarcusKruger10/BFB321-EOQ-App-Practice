@@ -153,3 +153,13 @@ footer {
         grid-template-columns: repeat(3, 1fr);   /* 3 cards side by side */
     }
 }
+
+/* ===== Calculator results ===== */
+.result {
+    border-left: 6px solid #2e8b57;   /* green stripe */
+}
+
+.error {
+    color: #b00020;
+    font-weight: bold;
+}
