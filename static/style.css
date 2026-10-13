@@ -1,0 +1,155 @@
+/* ===== Universal selector (*) + box model ===== */
+* {
+    box-sizing: border-box;   /* width includes padding + border */
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Element selectors ===== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;          /* HEX colour */
+    color: #222222;
+    line-height: 1.6;
+}
+
+/* ===== Header: Flexbox (one dimension) ===== */
+/* Mobile-first: stacked in a column on small screens */
+header {
+    background-color: rgb(20, 61, 89);  /* RGB colour */
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ===== Combined (descendant) selector: <a> inside <header> ===== */
+header a {
+    color: white;
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Box model in action: padding, border, margin ===== */
+main {
+    max-width: 900px;
+    margin: 24px auto;      /* auto left/right centres the page */
+    padding: 0 16px;
+}
+
+section {
+    background-color: white;
+    padding: 20px;                 /* space INSIDE the border */
+    border: 1px solid #dddddd;     /* the border itself */
+    margin-bottom: 20px;           /* space OUTSIDE the border */
+    border-radius: 8px;
+}
+
+h2 {
+    color: hsl(204, 63%, 21%);     /* HSL colour */
+    margin-bottom: 12px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* ===== Child selector: <li> DIRECTLY inside <ul> or <ol> ===== */
+ul > li,
+ol > li {
+    margin-left: 24px;
+}
+
+/* ===== ID selector (#) - only ONE element has this id ===== */
+#welcome {
+    border-left: 6px solid #f2a900;
+}
+
+/* ===== Class selectors (.) + Grid (two dimensions) ===== */
+/* Mobile-first: 1 column on small screens */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.card {
+    background-color: #eef4f8;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+/* ===== Table ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+}
+
+th,
+td {
+    border: 1px solid #cccccc;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #143d59;
+    color: white;
+}
+
+/* ===== Form: Flexbox column ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 400px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+select {
+    padding: 8px;
+    border: 1px solid #aaaaaa;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #f2a900;
+    border: none;
+    padding: 10px;
+    margin-top: 8px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 16px;
+    color: #666666;
+}
+
+/* ===== Responsive design: media queries (mobile-first) ===== */
+@media (min-width: 600px) {
+    header {
+        flex-direction: row;              /* logo left, links right */
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media (min-width: 900px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);   /* 3 cards side by side */
+    }
+}

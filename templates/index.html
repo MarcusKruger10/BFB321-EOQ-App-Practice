@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EOQ Calculator | Home</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <header>
@@ -16,7 +17,7 @@
     </header>
 
     <main>
-        <section>
+        <section id="welcome">
             <h2>Welcome</h2>
             <p>This app calculates the <strong>Economic Order Quantity (EOQ)</strong>:
                the order size that minimises total ordering and holding cost.</p>
@@ -24,11 +25,20 @@
 
         <section>
             <h2>What you can do</h2>
-            <ul>
-                <li>Learn how the EOQ model works</li>
-                <li>Enter your own demand and cost figures</li>
-                <li>Get the optimal order quantity instantly</li>
-            </ul>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Learn</h3>
+                    <p>See how the EOQ model balances ordering and holding costs.</p>
+                </article>
+                <article class="card">
+                    <h3>Enter</h3>
+                    <p>Type in your own demand and cost figures.</p>
+                </article>
+                <article class="card">
+                    <h3>Calculate</h3>
+                    <p>Get the optimal order quantity instantly.</p>
+                </article>
+            </div>
         </section>
     </main>
 
