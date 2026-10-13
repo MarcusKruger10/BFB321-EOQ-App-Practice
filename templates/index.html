@@ -1,49 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EOQ Calculator | Home</title>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-    <header>
-        <h1>EOQ Calculator</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About EOQ</a>
-            <a href="calculator.html">Calculator</a>
-        </nav>
-    </header>
+{% extends 'base.html' %}
 
-    <main>
-        <section id="welcome">
-            <h2>Welcome</h2>
-            <p>This app calculates the <strong>Economic Order Quantity (EOQ)</strong>:
-               the order size that minimises total ordering and holding cost.</p>
-        </section>
+{% block title %}Home{% endblock %}
 
-        <section>
-            <h2>What you can do</h2>
-            <div class="card-grid">
-                <article class="card">
-                    <h3>Learn</h3>
-                    <p>See how the EOQ model balances ordering and holding costs.</p>
-                </article>
-                <article class="card">
-                    <h3>Enter</h3>
-                    <p>Type in your own demand and cost figures.</p>
-                </article>
-                <article class="card">
-                    <h3>Calculate</h3>
-                    <p>Get the optimal order quantity instantly.</p>
-                </article>
-            </div>
-        </section>
-    </main>
+{% block content %}
+<section id="welcome">
+    <h2>Welcome, {{ name }}!</h2>
+    <p>This app calculates the <strong>Economic Order Quantity (EOQ)</strong>:
+       the order size that minimises total ordering and holding cost.</p>
+</section>
 
-    <footer>
-        <p>BFB 321 Practice Project</p>
-    </footer>
-</body>
-</html>
+<section>
+    <h2>What you can do</h2>
+    <div class="card-grid">
+        <article class="card">
+            <h3>Learn</h3>
+            <p>See how the EOQ model balances ordering and holding costs.</p>
+        </article>
+        <article class="card">
+            <h3>Enter</h3>
+            <p>Type in your own demand and cost figures.</p>
+        </article>
+        <article class="card">
+            <h3>Calculate</h3>
+            <p>Get the optimal order quantity instantly.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

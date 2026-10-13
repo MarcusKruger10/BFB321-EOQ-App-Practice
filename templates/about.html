@@ -1,66 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EOQ Calculator | About EOQ</title>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-    <header>
-        <h1>EOQ Calculator</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About EOQ</a>
-            <a href="calculator.html">Calculator</a>
-        </nav>
-    </header>
+{% extends 'base.html' %}
 
-    <main>
-        <section>
-            <h2>What is EOQ?</h2>
-            <p>The Economic Order Quantity is the order size that balances two competing costs:</p>
-            <ol>
-                <li><strong>Ordering cost:</strong> a fixed cost every time you place an order.</li>
-                <li><strong>Holding cost:</strong> the cost of keeping each unit in the warehouse.</li>
-            </ol>
-            <p>Formula: <strong>EOQ = √(2 × D × S ÷ H)</strong></p>
-        </section>
+{% block title %}About EOQ{% endblock %}
 
-        <section>
-            <h2>The inputs</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Meaning</th>
-                        <th>Example</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>D</td>
-                        <td>Annual demand (units per year)</td>
-                        <td>12 000</td>
-                    </tr>
-                    <tr>
-                        <td>S</td>
-                        <td>Ordering cost per order</td>
-                        <td>R50</td>
-                    </tr>
-                    <tr>
-                        <td>H</td>
-                        <td>Holding cost per unit per year</td>
-                        <td>R2</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>With these numbers, EOQ ≈ <strong>774.6 units</strong>, about 15.49 orders per year.</p>
-        </section>
-    </main>
+{% block content %}
+<section>
+    <h2>What is EOQ?</h2>
+    <p>The Economic Order Quantity is the order size that balances two competing costs:</p>
+    <ol>
+        <li><strong>Ordering cost:</strong> a fixed cost every time you place an order.</li>
+        <li><strong>Holding cost:</strong> the cost of keeping each unit in the warehouse.</li>
+    </ol>
+    <p>Formula: <strong>EOQ = √(2 × D × S ÷ H)</strong></p>
+</section>
 
-    <footer>
-        <p>BFB 321 Practice Project</p>
-    </footer>
-</body>
-</html>
+<section>
+    <h2>The inputs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Meaning</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in inputs %}
+            <tr>
+                <td>{{ row.symbol }}</td>
+                <td>{{ row.meaning }}</td>
+                <td>{{ row.example }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>With these numbers, EOQ ≈ <strong>{{ example_eoq }} units</strong>
+       (calculated live by Python).</p>
+</section>
+{% endblock %}
